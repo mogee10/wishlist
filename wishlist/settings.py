@@ -33,12 +33,47 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'items',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
+
+
 ]
+
+SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS={
+    'GitHub':{
+        'SCOPE':[
+            'user',
+            'repo',
+            'read:org',
+        ]
+    },
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'offline',
+        }
+    }
+
+}
+
+LOGIN_REDIRECT_URL = "/items/list"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
